@@ -153,7 +153,10 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 				digiDate.innerHTML = datestr;
 			}
 			else {
-				var hourAngle =  TAU * hours / 24;
+				var hourAngle =  TAU * (hours % 12) / 12;
+				hourAngle -= TAU / 4;
+				// We want 0 angle at top, but default is at right.
+				// Just translate backwards. Same for other hands.				
 				var hourX1 = cx + Math.cos(hourAngle - TAU20) * 10;
 				var hourY1 = cy + Math.sin(hourAngle - TAU20) * 10;
 				var hourX2 = cx + Math.cos(hourAngle) * 85;
@@ -171,6 +174,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 				);
 				
 				var minuteAngle = TAU * minutes / 60;
+				minuteAngle -= TAU / 4;
 				var minuteX1 = cx + Math.cos(minuteAngle - TAU40) * 10;
 				var minuteY1 = cy + Math.sin(minuteAngle - TAU40) * 10;
 				var minuteX2 = cx + Math.cos(minuteAngle) * 85;
@@ -188,6 +192,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 				);
 				
 				var secondAngle = TAU * seconds / 60;
+				secondAngle -= TAU / 4;
 				var secondX1 = cx + Math.cos(secondAngle - TAU60) * 10;
 				var secondY1 = cy + Math.sin(secondAngle - TAU60) * 10;
 				var secondX2 = cx + Math.cos(secondAngle) * 85;
